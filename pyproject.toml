@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "quantx"
+name = "quantxlib"
 version = "0.1.0"
 description = "Quantum computing for everyone — use quantum algorithms without knowing quantum mechanics."
 readme = "README.md"
