@@ -1,21 +1,21 @@
-# QuantumEasy
+# QuantX
 
 Quantum computing for everyone. Use quantum algorithms without knowing quantum mechanics.
 
 ```python
-from quantumeasy import search
+from quantx import search
 
 result = search(["alice", "bob", "charlie", "diana"], target="charlie")
 print(result)
 # SearchResult(FOUND: 'charlie', confidence=100.0%, qubits=2, iterations=1)
 ```
 
-QuantumEasy wraps [Qiskit](https://qiskit.org/) and handles all the quantum circuit construction, qubit management, and measurement interpretation behind a clean Python API. You pass in normal Python data, you get back normal Python results.
+QuantX wraps [Qiskit](https://qiskit.org/) and handles all the quantum circuit construction, qubit management, and measurement interpretation behind a clean Python API. You pass in normal Python data, you get back normal Python results.
 
 ## Install
 
 ```bash
-pip install quantumeasy
+pip install quantx
 ```
 
 Requires Python 3.9+ and Qiskit 2.x (installed automatically).
@@ -27,7 +27,7 @@ Requires Python 3.9+ and Qiskit 2.x (installed automatically).
 Grover's algorithm searches an unsorted collection in O(sqrt(N)) time — a quadratic speedup over classical linear search.
 
 ```python
-from quantumeasy import search
+from quantx import search
 
 # Search through strings
 result = search(["alice", "bob", "charlie", "diana"], target="charlie")
@@ -57,19 +57,19 @@ circuit = result.get_circuit()
 
 ### Configure the backend
 
-QuantumEasy uses a local simulator by default. Switch to real IBM Quantum hardware with one line:
+QuantX uses a local simulator by default. Switch to real IBM Quantum hardware with one line:
 
 ```python
-import quantumeasy
+import quantx
 
 # Local simulator (default — no setup needed)
-quantumeasy.set_backend("aer_simulator")
+quantx.set_backend("aer_simulator")
 
 # Real quantum hardware
-quantumeasy.set_backend("ibm_brisbane", token="your-ibm-quantum-token")
+quantx.set_backend("ibm_brisbane", token="your-ibm-quantum-token")
 
 # Adjust measurement shots (default: 1024)
-quantumeasy.set_shots(4096)
+quantx.set_shots(4096)
 ```
 
 Get a free IBM Quantum token at [quantum.ibm.com](https://quantum.ibm.com/).
@@ -85,7 +85,7 @@ Get a free IBM Quantum token at [quantum.ibm.com](https://quantum.ibm.com/).
 
 ## Error Messages
 
-QuantumEasy is designed to give you clear, actionable errors — not cryptic quantum tracebacks:
+QuantX is designed to give you clear, actionable errors — not cryptic quantum tracebacks:
 
 ```
 InvalidInputError: Target 'eve' is not in the search space.
@@ -97,7 +97,7 @@ Your list contains: ['alice', 'bob', 'charlie', 'diana']
 QubitLimitError: This operation needs 25 qubits, but the current backend
 supports up to 24.
 Try reducing your input size or switching to a more powerful backend:
-  quantumeasy.set_backend('ibm_brisbane', token='your-token')
+  quantx.set_backend('ibm_brisbane', token='your-token')
 ```
 
 ## API Reference
@@ -133,7 +133,7 @@ Set the default number of measurement shots (default: 1024).
 
 ## How It Works
 
-When you call `search(items, target)`, QuantumEasy:
+When you call `search(items, target)`, QuantX:
 
 1. Validates your input and gives a clear error if something is wrong
 2. Calculates how many qubits are needed (`ceil(log2(len(items)))`)
@@ -149,21 +149,21 @@ You get the quantum speedup without writing a single quantum gate.
 
 ```bash
 # Clone and install in dev mode
-git clone https://github.com/aaravchourishi/quantumeasy.git
-cd quantumeasy
+git clone https://github.com/aaravchourishi/quantx.git
+cd quantx
 pip install -e ".[dev]"
 
 # Run tests
 pytest
 
 # Run tests with coverage
-pytest --cov=quantumeasy
+pytest --cov=quantx
 ```
 
 ## Project Structure
 
 ```
-quantumeasy/
+quantx/
 ├── __init__.py       # Public API
 ├── search.py         # Grover's search
 ├── backends.py       # Backend management

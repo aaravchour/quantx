@@ -12,8 +12,8 @@ a problem in line 1 of search() than to get a cryptic Qiskit error
 
 from typing import Any, List
 
-from quantumeasy.exceptions import InvalidInputError, QubitLimitError
-from quantumeasy.utils import next_power_of_2, qubits_needed
+from quantx.exceptions import InvalidInputError, QubitLimitError
+from quantx.utils import next_power_of_2, qubits_needed
 
 
 def validate_search_items(items: Any) -> list:
@@ -64,7 +64,7 @@ def validate_search_target(items: list, target: Any) -> int:
     Raises:
         SearchError: If the target is not in the list.
     """
-    from quantumeasy.exceptions import SearchError
+    from quantx.exceptions import SearchError
 
     if target not in items:
         # Show a preview of what IS in the list to help the user
@@ -112,7 +112,7 @@ def validate_qubit_requirements(
                 f"{n_qubits} qubits (to encode {padded:,} states).\n"
                 f"The current backend supports up to {backend_max_qubits} qubits.\n"
                 f"Try reducing your input size or switching to a more powerful backend:\n"
-                f"  quantumeasy.set_backend('ibm_brisbane', token='your-token')"
+                f"  quantx.set_backend('ibm_brisbane', token='your-token')"
             ),
         )
 

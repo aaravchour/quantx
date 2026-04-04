@@ -1,29 +1,29 @@
 """
-Custom exceptions for QuantumEasy.
+Custom exceptions for QuantX.
 
-Design decision: We have a base class (QuantumEasyError) and specific subclasses
+Design decision: We have a base class (QuantXError) and specific subclasses
 for different error categories. This lets users catch broad errors with
-`except QuantumEasyError` or specific ones with `except QubitLimitError`.
+`except QuantXError` or specific ones with `except QubitLimitError`.
 
 Every exception stores a human-readable message with actionable advice —
 not just "something went wrong" but "here's what happened and how to fix it."
 """
 
 
-class QuantumEasyError(Exception):
-    """Base exception for all QuantumEasy errors.
+class QuantXError(Exception):
+    """Base exception for all QuantX errors.
 
     All custom exceptions inherit from this, so users can do:
         try:
             result = search(items, target)
-        except QuantumEasyError as e:
+        except QuantXError as e:
             print(e)  # Always a human-readable message
     """
 
     pass
 
 
-class QubitLimitError(QuantumEasyError):
+class QubitLimitError(QuantXError):
     """Raised when the problem requires more qubits than the backend supports.
 
     Example:
@@ -44,8 +44,8 @@ class QubitLimitError(QuantumEasyError):
         super().__init__(message)
 
 
-class InvalidInputError(QuantumEasyError):
-    """Raised when the user provides invalid input to a QuantumEasy function.
+class InvalidInputError(QuantXError):
+    """Raised when the user provides invalid input to a QuantX function.
 
     Example:
         InvalidInputError: Cannot search an empty list.
@@ -55,7 +55,7 @@ class InvalidInputError(QuantumEasyError):
     pass
 
 
-class BackendError(QuantumEasyError):
+class BackendError(QuantXError):
     """Raised when there's a problem with the quantum backend.
 
     Example:
@@ -66,7 +66,7 @@ class BackendError(QuantumEasyError):
     pass
 
 
-class SearchError(QuantumEasyError):
+class SearchError(QuantXError):
     """Raised for search-specific issues.
 
     Example:

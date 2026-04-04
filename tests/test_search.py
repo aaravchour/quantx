@@ -1,5 +1,5 @@
 """
-Tests for the QuantumEasy search module.
+Tests for the QuantX search module.
 
 Testing strategy:
 - Unit tests for utility functions (deterministic, fast)
@@ -14,13 +14,13 @@ import math
 
 import pytest
 
-from quantumeasy import search, SearchResult
-from quantumeasy.exceptions import (
+from quantx import search, SearchResult
+from quantx.exceptions import (
     InvalidInputError,
     QubitLimitError,
     SearchError,
 )
-from quantumeasy.utils import (
+from quantx.utils import (
     next_power_of_2,
     optimal_grover_iterations,
     qubits_needed,

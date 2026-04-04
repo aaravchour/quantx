@@ -1,5 +1,5 @@
 """
-Shared utilities used across QuantumEasy modules.
+Shared utilities used across QuantX modules.
 
 These are internal helpers — things like "how many qubits do I need for N items?"
 that multiple modules will use. Keeping them here avoids duplication.

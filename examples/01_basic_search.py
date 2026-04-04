@@ -2,14 +2,14 @@
 Example 01 — Basic Quantum Search
 ===================================
 
-This example shows how to use QuantumEasy to search a list
+This example shows how to use QuantX to search a list
 using Grover's quantum search algorithm.
 
 You don't need to know anything about quantum computing!
-Just pass a list and a target — QuantumEasy handles the rest.
+Just pass a list and a target — QuantX handles the rest.
 """
 
-from quantumeasy import search
+from quantx import search
 
 # --- Example 1: Simple string search ---
 print("=" * 50)

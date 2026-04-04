@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "quantumeasy"
+name = "quantx"
 version = "0.1.0"
 description = "Quantum computing for everyone — use quantum algorithms without knowing quantum mechanics."
 readme = "README.md"
@@ -38,8 +38,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/aaravchourishi/quantumeasy"
-Issues = "https://github.com/aaravchourishi/quantumeasy/issues"
+Homepage = "https://github.com/aaravchourishi/quantx"
+Issues = "https://github.com/aaravchourishi/quantx/issues"
+
+[tool.setuptools.packages.find]
+include = ["quantx*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

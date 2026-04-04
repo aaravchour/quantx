@@ -1,10 +1,10 @@
 """
-Backend management for QuantumEasy.
+Backend management for QuantX.
 
 This module uses the "module-level state" pattern — there's a single global
 BackendManager that all modules share. When a user calls:
 
-    quantumeasy.set_backend("ibm_brisbane", token="xxx")
+    quantx.set_backend("ibm_brisbane", token="xxx")
 
 ...it updates this shared state, and the next time any module runs a circuit,
 it uses the new backend automatically.
@@ -22,14 +22,14 @@ from typing import Optional
 from qiskit import transpile
 from qiskit_aer import AerSimulator
 
-from quantumeasy.exceptions import BackendError
+from quantx.exceptions import BackendError
 
 
 class BackendManager:
     """Manages the active quantum backend.
 
     This class holds the current backend configuration. There's one global
-    instance (_default_manager) that all QuantumEasy modules use.
+    instance (_default_manager) that all QuantX modules use.
     """
 
     # Maximum qubits for common backends (used for helpful error messages)
@@ -95,7 +95,7 @@ class BackendManager:
             raise BackendError(
                 f"To use '{backend_name}', you need an IBM Quantum API token.\n"
                 f"Get one at https://quantum.ibm.com/ and pass it as:\n"
-                f"  quantumeasy.set_backend('{backend_name}', token='your-token')"
+                f"  quantx.set_backend('{backend_name}', token='your-token')"
             )
 
         try:
@@ -157,9 +157,9 @@ def set_backend(
         max_qubits: Override the qubit limit for the backend.
 
     Examples:
-        >>> import quantumeasy
-        >>> quantumeasy.set_backend("aer_simulator")  # Default
-        >>> quantumeasy.set_backend("ibm_brisbane", token="your-token")
+        >>> import quantx
+        >>> quantx.set_backend("aer_simulator")  # Default
+        >>> quantx.set_backend("ibm_brisbane", token="your-token")
     """
     _default_manager.set_backend(backend_name, token, max_qubits)
 
@@ -174,7 +174,7 @@ def set_shots(shots: int) -> None:
         shots: Number of times to run each circuit.
 
     Examples:
-        >>> import quantumeasy
-        >>> quantumeasy.set_shots(4096)  # More accurate results
+        >>> import quantx
+        >>> quantx.set_shots(4096)  # More accurate results
     """
     _default_manager.shots = shots

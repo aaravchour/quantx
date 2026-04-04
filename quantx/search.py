@@ -1,9 +1,9 @@
 """
 Quantum search module — wraps Grover's algorithm.
 
-This is the flagship module of QuantumEasy. A developer writes:
+This is the flagship module of QuantX. A developer writes:
 
-    from quantumeasy import search
+    from quantx import search
     result = search(["alice", "bob", "charlie", "diana"], target="charlie")
 
 ...and internally, we:
@@ -25,13 +25,13 @@ from typing import Any, List, Optional
 
 from qiskit import QuantumCircuit
 
-from quantumeasy._validators import (
+from quantx._validators import (
     validate_qubit_requirements,
     validate_search_items,
     validate_search_target,
 )
-from quantumeasy.backends import get_backend
-from quantumeasy.utils import next_power_of_2, optimal_grover_iterations, qubits_needed
+from quantx.backends import get_backend
+from quantx.utils import next_power_of_2, optimal_grover_iterations, qubits_needed
 
 
 @dataclass
@@ -70,7 +70,7 @@ class SearchResult:
     def get_circuit(self) -> QuantumCircuit:
         """Get the raw Qiskit circuit for inspection.
 
-        Use this to peek under the hood and see what QuantumEasy built.
+        Use this to peek under the hood and see what QuantX built.
 
         Returns:
             The Qiskit QuantumCircuit used for this search.
@@ -240,7 +240,7 @@ def search(
 
     Grover's algorithm finds an item in an unsorted collection in O(sqrt(N))
     time — a quadratic speedup over classical linear search. You provide
-    a list and a target, and QuantumEasy handles all the quantum mechanics.
+    a list and a target, and QuantX handles all the quantum mechanics.
 
     Args:
         items: List of items to search through. Can be any Python objects
@@ -262,7 +262,7 @@ def search(
         QubitLimitError: If the search space exceeds backend capacity.
 
     Examples:
-        >>> from quantumeasy import search
+        >>> from quantx import search
         >>> result = search(["alice", "bob", "charlie", "diana"], target="charlie")
         >>> print(result)
         SearchResult(FOUND: 'charlie', confidence=96.5%, qubits=2, iterations=1)
@@ -289,12 +289,12 @@ def search(
 
     # Notify about padding if needed
     if padded_size != n_items and not auto_pad:
-        from quantumeasy.exceptions import InvalidInputError
+        from quantx.exceptions import InvalidInputError
 
         raise InvalidInputError(
             f"Your search space has {n_items} items, which is not a power of 2.\n"
             f"Grover's algorithm needs a power-of-2 search space.\n"
-            f"QuantumEasy can pad it to {padded_size} items automatically.\n"
+            f"QuantX can pad it to {padded_size} items automatically.\n"
             f"Set auto_pad=True (default) to allow this."
         )
 
