@@ -3,7 +3,7 @@
 Quantum computing for everyone. Use quantum algorithms without knowing quantum mechanics.
 
 ```python
-from quantxlib import search
+from quantx import search
 
 result = search(["alice", "bob", "charlie", "diana"], target="charlie")
 print(result)
@@ -27,7 +27,7 @@ Requires Python 3.9+ and Qiskit 2.x (installed automatically).
 Grover's algorithm searches an unsorted collection in O(sqrt(N)) time — a quadratic speedup over classical linear search.
 
 ```python
-from quantxlib import search
+from quantx import search
 
 # Search through strings
 result = search(["alice", "bob", "charlie", "diana"], target="charlie")
@@ -60,16 +60,16 @@ circuit = result.get_circuit()
 QuantX uses a local simulator by default. Switch to real IBM Quantum hardware with one line:
 
 ```python
-import quantxlib
+import quantx
 
 # Local simulator (default — no setup needed)
-quantxlib.set_backend("aer_simulator")
+quantx.set_backend("aer_simulator")
 
 # Real quantum hardware
-quantxlib.set_backend("ibm_brisbane", token="your-ibm-quantum-token")
+quantx.set_backend("ibm_brisbane", token="your-ibm-quantum-token")
 
 # Adjust measurement shots (default: 1024)
-quantxlib.set_shots(4096)
+quantx.set_shots(4096)
 ```
 
 Get a free IBM Quantum token at [quantum.ibm.com](https://quantum.ibm.com/).

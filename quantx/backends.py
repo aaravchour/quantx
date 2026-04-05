@@ -101,7 +101,7 @@ class BackendManager:
         try:
             from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
 
-            service = QiskitRuntimeService(channel="ibm_quantum", token=token)
+            service = QiskitRuntimeService(channel="ibm_quantum_platform", token=token)
             self._backend = service.backend(backend_name)
             self._backend_name = backend_name
             self._max_qubits = max_qubits or getattr(
@@ -122,6 +122,10 @@ class BackendManager:
     def run_circuit(self, circuit, shots: Optional[int] = None) -> dict:
         """Transpile and run a circuit on the current backend.
 
+        Uses backend.run() for the local Aer simulator, and the SamplerV2
+        primitives API for IBM hardware (since backend.run() was removed
+        from qiskit-ibm-runtime).
+
         Args:
             circuit: A Qiskit QuantumCircuit to execute.
             shots: Number of measurement shots. Uses default if not specified.
@@ -131,8 +135,27 @@ class BackendManager:
         """
         shots = shots or self._shots
         compiled = transpile(circuit, self._backend)
-        result = self._backend.run(compiled, shots=shots).result()
-        return result.get_counts(compiled)
+
+        if self._backend_name == "aer_simulator":
+            result = self._backend.run(compiled, shots=shots).result()
+            return result.get_counts(compiled)
+
+        # IBM hardware uses SamplerV2 primitives
+        from qiskit_ibm_runtime import SamplerV2
+
+        sampler = SamplerV2(mode=self._backend)
+        sampler.options.default_shots = shots
+        job = sampler.run([compiled])
+        result = job.result()
+
+        # SamplerV2 returns a PubResult per circuit — extract counts
+        # The classical register name varies (e.g. "meas", "c"), so we
+        # grab whichever field the DataBin has
+        pub_result = result[0]
+        data_bin = pub_result.data
+        field_name = list(data_bin.keys())[0]
+        counts = getattr(data_bin, field_name).get_counts()
+        return counts
 
 
 # Global default backend manager — shared by all modules
