@@ -14,7 +14,7 @@ Configure backend:
     >>> quantx.set_backend("ibm_brisbane", token="your-token")
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 # Public API — these are what `from quantx import X` exposes
 from quantx.search import search, SearchResult

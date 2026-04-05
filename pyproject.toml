@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "quantxlib"
-version = "0.1.0"
+version = "0.1.1"
 description = "Quantum computing for everyone — use quantum algorithms without knowing quantum mechanics."
 readme = "README.md"
 license = "MIT"
